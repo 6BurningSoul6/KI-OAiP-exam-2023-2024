@@ -1,0 +1,25 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int main(void){
+    int Batyra_A_V, Scolko_Piva_Vladimcev_per_Minutes = 0;
+    printf("\nВведите N:");
+    scanf("%d", &Batyra_A_V);
+    int Kova, ka = 0;
+    int* kVladimcev = (int*)malloc(sizeof(int) * Scolko_Piva_Vladimcev_per_Minutes);
+    while(Batyra_A_V != 0){
+        Kova = Batyra_A_V%10;
+        Batyra_A_V = Batyra_A_V/10;
+        if (Kova % 3 == 0 && Kova != 0){
+            Scolko_Piva_Vladimcev_per_Minutes++;
+            kVladimcev = realloc(kVladimcev, sizeof(int) *(Scolko_Piva_Vladimcev_per_Minutes));
+            kVladimcev[ka] = Kova;
+            ka++;
+        }
+    }
+    for (int Lucik = 0; Lucik < Scolko_Piva_Vladimcev_per_Minutes; ++Lucik) {
+        printf("\n%d\n", kVladimcev[Lucik]);
+    }
+    free(kVladimcev);
+    return 0;
+}
