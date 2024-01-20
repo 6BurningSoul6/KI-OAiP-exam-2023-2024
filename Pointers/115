@@ -1,0 +1,50 @@
+/*115.	 Дана целочисленная матрица размерности nxn.
+Найти номера строк, все элементы которых делятся на 
+3 без остатка.*/
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+
+int main()
+{
+	setlocale(LC_ALL, "Ru");
+	int AV;
+	printf("Введите размерность матрицы:\n");
+	scanf_s("%d", &AV);
+	int** best = (int**)calloc(AV, sizeof(int*));
+	for (int i = 0; i < AV; i++)
+		best[i] = (int*)calloc(AV, sizeof(int));
+	printf("Введите элементы матрицы\n");
+	for (int i = 0; i < AV; i++)
+		for (int j = 0; j < AV; j++)
+			scanf_s("%d", &best[i][j]);
+	printf("Ваша матрица:\n");
+	for (int i = 0; i < AV; i++)
+	{
+		for (int j = 0; j < AV; j++)
+			printf("%5d", best[i][j]);
+		printf("\n");
+	}
+	printf("Номера строк, в которых все элементы кратны 3: ");
+	for (int i = 0; i < AV; i++)
+	{
+		int prepod = 1;
+		for (int j = 0; j < AV; j++)
+		{
+			if (best[i][j] % 3 != 0)
+			{
+				prepod = 0;
+				break;
+			}
+		}
+		if (prepod == 1)
+			printf("%d  ", i+1);
+	}
+	for (int i = 0; i < AV; i++)
+		free(best[i]);
+	free(best);
+	return 0;
+
+}
