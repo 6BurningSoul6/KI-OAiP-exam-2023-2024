@@ -1,0 +1,25 @@
+#include <stdio.h>
+
+int is_True_Batyra(int Batyra_A_V){
+    if (Batyra_A_V > 1){
+
+        for (int i = 2; i < Batyra_A_V; i++)
+            if (Batyra_A_V % i == 0)
+                return 0;
+        return Batyra_A_V;
+    }
+    else
+        return 0;
+}
+
+int main(void){
+    int Batyra_A_V, Luciq = 0;
+    printf("\nВведите N:");
+    scanf("%d", &Batyra_A_V);
+    for (int Ocenka = 0, h; Ocenka <= Batyra_A_V; ++Ocenka) {
+        Luciq+= is_True_Batyra(Ocenka);
+    }
+    printf("\nПолученная сумма: %d\n", Luciq);
+
+    return 0;
+}
