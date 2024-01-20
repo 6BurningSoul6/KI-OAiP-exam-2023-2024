@@ -6,17 +6,17 @@
 #include <stdlib.h>
 #include <locale.h>
 #include <string.h>
-#define len 100
+#define len 100   // Длина строки
 
 int main()
 {
 	setlocale(LC_ALL, "Ru");
 	printf("Введите строку:\n");
-	char* tubus = (char*)calloc(len, sizeof(char));
+	char* tubus = (char*)calloc(len, sizeof(char));  //Данная строка
 	fgets(tubus, len, stdin);
 	rewind(stdin);
-	int pivo = strlen(tubus);
-	int whisky = 0;
+	int pivo = strlen(tubus); //текущая длина строки
+	int whisky = 0; //количество пробелов
 	for (int i = 0; i < pivo; i++)
 	{
 		if (tubus[i] == ' ')
