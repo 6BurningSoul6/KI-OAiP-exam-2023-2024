@@ -1,0 +1,38 @@
+/*56.	 Задан массив А(10).Получить из него массив В, состоящий из элементов 
+массива А, которые больше 0.*/
+
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+
+int main()
+{
+	setlocale(LC_ALL, "Ru");
+	int vodka[10];
+	printf("Введите массив:\n");
+	for (int i = 0; i < 10; i++)
+		scanf_s("%d", &vodka[i]);
+	int gradus = 0;
+	for (int i = 0; i < 10; i++)
+		if (vodka[i] > 0)
+			gradus++;
+	if (gradus == 0)
+	{
+		printf("В массиве нет положительных элементов.");
+		return 0;
+	}
+	int* pivo = (int*)calloc(gradus, sizeof(int));
+	int j = 0;
+	for (int i = 0; i < 10; i++)
+		if (vodka[i] > 0)
+		{
+			pivo[j] = vodka[i];
+			j++;
+		}
+	for (int i = 0; i < gradus; i++)
+		printf("%d", pivo[i]);
+	free(pivo);
+	return 0;
+
+}
