@@ -1,0 +1,47 @@
+/*Заданы два массива А(5) и В(5). Подсчитать в них количество элементов,
+меньших значения t,  и первым на печать вывести массив,
+имеющий наибольшее их количество.*/
+
+#include <stdio.h>
+#include <locale.h>
+
+int main()
+{
+	setlocale(LC_ALL, "Ru");
+	int t;
+	printf("Введите t:\n");
+	scanf_s("%d", &t);
+	int A[5];
+	int B[5];
+	printf("Введите массив A:\n");
+	for (int i = 0; i < 5; i++)
+		scanf_s("%d", &A[i]);
+	printf("Введите массив B:\n");
+	for (int i = 0; i < 5; i++)
+		scanf_s("%d", &B[i]);
+	int countA = 0, countB = 0;
+	for (int i = 0; i < 5; i++)
+	{
+		if (A[i] < t)
+			countA++;
+		if (B[i] < t)
+			countB++;
+	}
+	if (countA >= countB)
+	{
+		for (int i = 0; i < 5; i++)
+			printf("%d ", A[i]);
+		printf("\t");
+		for (int i = 0; i < 5; i++)
+			printf("%d ", B[i]);
+	}
+	if (countA < countB)
+	{
+		for (int i = 0; i < 5; i++)
+			printf("%d ", B[i]);
+		printf("\t");
+		for (int i = 0; i < 5; i++)
+			printf("%d ", A[i]);
+	}
+	return 0;
+}
