@@ -1,0 +1,35 @@
+/*123.  Ввести строку и удалить из нее все пробелы, 
+сдвинув все остальные символы влево. Дополнительных
+строк не использовать. Полученную строку вывести. */
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+#include <string.h>
+#define len 100
+
+int main()
+{
+	setlocale(LC_ALL, "Ru");
+	printf("Введите строку:\n");
+	char* tubus = (char*)calloc(len, sizeof(char));
+	fgets(tubus, len, stdin);
+	rewind(stdin);
+	int pivo = strlen(tubus);
+	int whisky = 0;
+	for (int i = 0; i < pivo; i++)
+	{
+		if (tubus[i] == ' ')
+		{
+			for (int j = i; j < pivo - whisky; j++)
+				tubus[j] = tubus[j + 1];
+			whisky++;
+			i--;
+		}
+	}
+	pivo = strlen(tubus);
+	tubus = (char*)realloc(tubus, (pivo+1) * sizeof(char));
+	printf("Новая строка: %s", tubus);
+	free(tubus);
+	return 0;
+}
