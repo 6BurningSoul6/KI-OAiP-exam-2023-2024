@@ -1,0 +1,21 @@
+#include <stdio.h>
+#include <stdarg.h> // предоставляющий средства для перебора аргументов функции, количество и типы которых заранее не известны.
+
+int Palubochek(int SHelotovich, ...){ // превый аргумент как бы количество возможных аргументов
+    int stependia = 0;
+    va_list arg; // принимает агумент позволяет обрабатывать нефиксированный набор параметров.
+    va_start(arg, SHelotovich); // фактически va_list выступает в данной роли как указатель.
+    for (int i = 0; i < SHelotovich; ++i) {
+        stependia += va_arg(arg, int);
+    }
+    va_end(arg); // va_end позволяет выйти из функции с переменным списком параметров.
+    return stependia;
+}
+
+int main(void){
+    int summa;
+    summa = Palubochek(6, 1, 2, 3 ,4 ,5 , 6);
+    printf("Полученная сумма: %d\n", summa);
+
+    return 0;
+}
