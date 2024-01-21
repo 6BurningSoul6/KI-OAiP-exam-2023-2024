@@ -88,5 +88,4 @@ void output(float** matrix)
         }
         printf("\n");
     }
-    printf("\n\n");
 }
