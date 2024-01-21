@@ -1,0 +1,67 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+void buildWordChain(char** words, int numWords) {
+    if (numWords <= 0) {
+        printf("No words provided.\n");
+        return;
+    }
+
+    // Создаем массив для хранения использованных слов
+    int* used = (int*) malloc(numWords * sizeof(int));
+    memset(used, 0, numWords * sizeof(int));
+
+    // Находим первое слово, чтобы начать цепочку
+    int startWordIndex = -1;
+    for (int i = 0; i < numWords; i++) {
+        if (words[i] != NULL) {
+            startWordIndex = i;
+            used[i] = 1;
+            break;
+        }
+    }
+
+    if (startWordIndex == -1) {
+        printf("No available words.\n");
+        free(used);
+        return;
+    }
+
+    printf("%s ", words[startWordIndex]);
+
+    // Строим цепочку слов
+    int currentWordIndex = startWordIndex;
+    while (1) {
+        char lastChar = words[currentWordIndex][strlen(words[currentWordIndex]) - 1];
+        int nextWordIndex = -1;
+
+        // Находим следующее слово, у которого символ в начале совпадает с последним символом текущего слова
+        for (int i = 0; i < numWords; i++) {
+            if (!used[i] && words[i] != NULL && words[i][0] == lastChar) {
+                nextWordIndex = i;
+                used[i] = 1;
+                break;
+            }
+        }
+
+        if (nextWordIndex == -1) {
+            break;
+        }
+
+        printf("%s ", words[nextWordIndex]);
+        currentWordIndex = nextWordIndex;
+    }
+
+    free(used);
+}
+
+int main() {
+    // Пример использования
+    char* words[] = {"apple", "elephant", "tiger", "rabbit", "zebra"};
+    int numWords = sizeof(words) / sizeof(words[0]);
+
+    buildWordChain(words, numWords);
+
+    return 0;
+}
