@@ -1,0 +1,39 @@
+#include <stdio.h>
+#include <stdbool.h>
+
+bool check_brackets(const char *name, int size) {
+    int count_of_brackets = 0; // Переменная для щета скобок
+    for (int i = 0; i < size; i++) { // Перебираем символы в строке
+        if (name[i] == '(') {
+            count_of_brackets++;// Увеличиваем счетчик открывающих скобок
+        } else if (name[i] == ')') {
+            count_of_brackets--; // Уменьшаем счетчик открывающих скобок при встрече закрывающей скобки
+            // Если счетчик становится отрицательным, это означает, что закрывающая скобка
+            // встретилась раньше соответствующей открывающей скобки
+             if (count_of_brackets < 0) {
+                return false;
+            }
+        }
+    }
+        return count_of_brackets == 0;   // Если счетчик не равен нулю в конце проверки, значит, есть непарные скобки
+}
+
+int main() {
+    int N;
+    printf("\nВведите N: ");
+    scanf("%d", &N);
+
+    char name[N + 1]; // +1 для учета символа '\0'
+    printf("\nВведите строку: ");
+    scanf("%s", name);
+
+    bool result_of_test = check_brackets(name, N);
+
+    if (result_of_test) {
+        printf("\nСкобки раставленны корректно, каждая закрытая скобка соответствует открытой.\n");
+    } else {
+        printf("Скобки раставленны некорректно.\n");
+    }
+
+    return 0;
+}
