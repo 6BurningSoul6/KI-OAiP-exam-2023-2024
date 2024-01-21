@@ -18,21 +18,14 @@ void Nestirenkov(int* Nastenky_Suda, int size_of_Pensil) {
 
 
 int main() {
-    int _15cantimetrov_ = 6;
-    int* Ivleeva = (int*)malloc(sizeof(int)*_15cantimetrov_);
-    Ivleeva[0] = -4;
-    Ivleeva[1] = 8;
-    Ivleeva[2] = -6;
-    Ivleeva[3] = 0;
-    Ivleeva[4] = 2;
-    Ivleeva[5] = -1;
+    int Ivleeva[6] = {-4, 8, -6, 0, 2, -1};
     printf("Исходный массив: ");
-    for (int EVS = 0; EVS < _15cantimetrov_; EVS++) {
+    for (int EVS = 0; EVS < 6; EVS++) {
         printf("%d ", Ivleeva[EVS]);
     }
-    Nestirenkov(Ivleeva, _15cantimetrov_);
+    Nestirenkov(Ivleeva, 6);
     printf("\nУпорядоченный массив: ");
-    for (int EVS = 0; EVS < _15cantimetrov_; EVS++) {
+    for (int EVS = 0; EVS < 6; EVS++) {
         printf("%d ", Ivleeva[EVS]);
     }
 
