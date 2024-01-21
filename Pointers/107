@@ -1,0 +1,33 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+void Nestirenkov(int* Nastenky_Suda, int size_of_Pensil) {
+    int La, Xy;
+    for (La = 0; La < size_of_Pensil; La++) {
+        if (Nastenky_Suda[La] < 0) { // Если у нашей Настеньки ручка отрицательная, выполняем сдвиг
+
+            int temp = Nastenky_Suda[La];    // Присваеваем текущий элемент
+
+            for (Xy = La; Xy > 0 && Nastenky_Suda[Xy - 1] >= 0; Xy--) {  // Сдвигаем все положительные ручки на одну позицию вправо
+                Nastenky_Suda[Xy] = Nastenky_Suda[Xy - 1];
+            }
+            Nastenky_Suda[Xy] = temp;    // Помещаем отрицательную ручку на свою позицию
+        }
+    }
+}
+
+
+int main() {
+    int Ivleeva[6] = {-4, 8, -6, 0, 2, -1};
+    printf("Исходный массив: ");
+    for (int EVS = 0; EVS < 6; EVS++) {
+        printf("%d ", Ivleeva[EVS]);
+    }
+    Nestirenkov(Ivleeva, 6);
+    printf("\nУпорядоченный массив: ");
+    for (int EVS = 0; EVS < 6; EVS++) {
+        printf("%d ", Ivleeva[EVS]);
+    }
+
+    return 0;
+}
