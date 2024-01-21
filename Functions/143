@@ -1,0 +1,77 @@
+#include <stdio.h>
+#include <stdlib.h>
+
+int** create_matrix(int size){
+    int** matrix = (int**)malloc(size * sizeof(int*));
+    for (int i = 0; i < size; i++) {
+        matrix[i] = (int*)malloc(size * sizeof(int));
+    }
+    return matrix;
+}
+
+
+void fill_matrix(int** matrix, int size){
+    printf("\nInput matrix elements: \n");
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            scanf("%d", &matrix[i][j]);
+        }
+
+    }
+}
+
+void free_matrix(int** matrix, int size){
+    for (int i = 0; i < size; i++) {
+        free(matrix[i]);
+    }
+    free(matrix);
+}
+
+
+void sort_array(int** array, int size, int k, int res) { // сортировка моссива от к-того эдемента по убыванию
+    int i, j;
+    for (i = k; i < size - 1; i++) {
+        for (j = k; j < size - i - 1; j++) {
+            if (array[res][j] < array[res][j + 1]) {
+                int temp = array[res][j];
+                array[res][j] = array[res][j + 1];
+                array[res][j + 1] = temp;
+            }
+        }
+    }
+}
+void sort_diagonal(int** matrix, int size) {
+    
+    int k = 0;
+    for (int i = 0; i < size; i++) {// Перебираем строки матрицы
+        k = i+1;
+        sort_array(matrix, size, k , i);// Вызываем эту функцию для сортировки строки по убыванию
+        }
+}
+
+
+void printMatrix(int** matrix, int size) {
+    for (int i = 0; i < size; i++) {
+        for (int j = 0; j < size; j++) {
+            printf("%d ", matrix[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    int N;
+    printf("\nВведите N: ");
+    scanf("%d", &N);
+    int** matrix = create_matrix(N);
+    fill_matrix(matrix, N);
+    printf("Исходная матрица:\n");
+    printMatrix(matrix, N);
+
+    sort_diagonal(matrix, N);
+
+    printf("Матрица после сортировки элементов выше главной диагонали по убыванию:\n");
+    printMatrix(matrix, N);
+    free_matrix(matrix, N);
+    return 0;
+}
