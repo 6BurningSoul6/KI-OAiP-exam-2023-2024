@@ -1,0 +1,66 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+int isUsed(int* used, int numWords, int index) {
+    for (int i = 0; i < numWords; i++) {
+        if (used[i] && i == index) {
+            return 1;
+        }
+    }
+    return 0;
+}
+
+void buildWordChainRec(char** words, int numWords, int currentWordIndex, int* used) {
+    used[currentWordIndex] = 1;
+    printf("%s ", words[currentWordIndex]);
+
+    char* currentWord = words[currentWordIndex];
+    int wordLength = strlen(currentWord);
+
+    for (int i = 1; i < wordLength - 1; i++) {
+        char startChar = currentWord[i];
+        int nextWordIndex = -1;
+
+        for (int j = 0; j < numWords; j++) {
+            if (!used[j] && words[j] != NULL && strchr(words[j], startChar) != NULL) {
+                nextWordIndex = j;
+                break;
+            }
+        }
+
+        if (nextWordIndex != -1) {
+            buildWordChainRec(words, numWords, nextWordIndex, used);
+            return;
+        }
+    }
+}
+
+void buildWordChain(char** words, int numWords) {
+    if (numWords <= 0) {
+        printf("No words provided.\n");
+        return;
+    }
+
+    int* used = (int*) malloc(numWords * sizeof(int));
+    memset(used, 0, numWords * sizeof(int));
+
+    for (int i = 0; i < numWords; i++) {
+        if (!isUsed(used, numWords, i)) {
+            buildWordChainRec(words, numWords, i, used);
+            break;
+        }
+    }
+
+    free(used);
+}
+
+int main() {
+    // Пример использования
+    char* words[] = {"apple", "elephant", "tiger", "rabbit", "zebra"};
+    int numWords = sizeof(words) / sizeof(words[0]);
+
+    buildWordChain(words, numWords);
+
+    return 0;
+}
