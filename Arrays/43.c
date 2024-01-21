@@ -37,6 +37,11 @@ int main()
     swapRows(matrix, maxElRow);
 
     output(matrix);
+
+    for (int row = 0; row < 7; row++) {
+        free(*(matrix + row));
+    }
+    free(matrix);
     
     return 0;
 }
