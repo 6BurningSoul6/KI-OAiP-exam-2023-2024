@@ -6,11 +6,11 @@
 int reverseNumber(int num) 
 {
     int reverse = 0;
-    bool isNegative = false;
+    int isNegative = 0;
 
     if (num < 0) 
     {
-        isNegative = true;
+        isNegative = 1;
         num = -num;
     }
 
@@ -21,7 +21,7 @@ int reverseNumber(int num)
         num /= 10;
     }
 
-    if (isNegative) 
+    if (isNegative == 1) 
         reverse = -reverse;
 
     return reverse;
