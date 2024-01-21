@@ -1,0 +1,50 @@
+/*144.	 В main ввести матрицу X[N][N]  (N≤5), элементы матрицы
+длинные целые числа. В функции найти сумму нечетных элементов
+расположенных выше главной диагонали. Результат вывести в main. */
+
+#include <locale.h>
+#include <stdio.h>
+#include <stdlib.h>
+
+long int FindSum(long int** X, int popa) 
+{
+    long int sum = 0;
+
+    for (int i = 0; i < popa; i++)
+        for (int j = i + 1; j < popa; j++)
+            if (X[i][j] % 2 != 0) 
+                sum += X[i][j];
+
+    return sum;
+}
+
+int main() 
+{
+    setlocale(LC_ALL, "Ru");
+    int popa;
+    printf("Введите размер матрицы(не больше 5)");
+    scanf_s("%d", &popa);
+    long int** X = (long int**)calloc(popa, sizeof(long int*));
+    for (int i = 0; i < popa; i++)
+        X[i] = (long int*)calloc(popa, sizeof(long int));
+    printf("Введите элементы матрицы:\n");
+    for (int i = 0; i < popa; i++) 
+        for (int j = 0; j < popa; j++) 
+            scanf_s("%d", &X[i][j]);
+ 
+    for (int i = 0; i < popa; i++)
+    {
+        for (int j = 0; j < popa; j++) 
+            printf("%5d", X[i][j]);
+        
+        printf("\n");
+    }
+
+     long int result = FindSum(X, popa);
+    printf("Сумма нечетных элементов выше главной диагонали: %ld\n", result);
+    for (int i = 0; i < popa; i++)
+        free(X[i]);
+    free(X);
+    return 0;
+}
+
